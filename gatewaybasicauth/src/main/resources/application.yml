@@ -1,0 +1,35 @@
+logging:
+  level:
+    org.springframework.cloud.gateway: DEBUG
+    reactor.netty.http.client: DEBUG
+server:
+  port: 8080
+spring:
+  application:
+    name: gateway-service
+  cloud:
+    consul:
+      discovery:
+        register: false
+        registerHealthCheck: false
+      config:
+        enabled: false
+      host: 192.168.1.102
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: persons-service
+          uri: lb://persons-service
+          predicates:
+            - Path=/persons/**
+          filters:
+            - RewritePath=/persons/(?<path>.*), /persons/$\{path}
+        - id: auth
+          uri: http://localhost:9100
+          predicates:
+            - Path=/auth/**
+            - Method=POST
+          filters:
+            - RewritePath=/auth/(?<path>.*), /auth/$\{path}
