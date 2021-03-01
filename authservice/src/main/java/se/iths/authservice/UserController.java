@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,6 +18,7 @@ import se.iths.authservice.common.JwtConfig;
 import se.iths.authservice.entities.User;
 
 import java.sql.Date;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -57,8 +59,11 @@ public class UserController {
         String dbPassword = user.getPassword();
 
         if (encoder.matches(existingPassword, dbPassword)) {
-            List<GrantedAuthority> grantedAuthorities = AuthorityUtils
-                    .commaSeparatedStringToAuthorityList("ROLE_" + user.getRoles());
+            List<GrantedAuthority> grantedAuthorities =
+                    Arrays.stream(user.getRoles().split(","))
+                            .map(s -> "ROLE_" + s)
+                            .map(SimpleGrantedAuthority::new)
+                            .collect(Collectors.toList());
 
             long now = System.currentTimeMillis();
             String token = Jwts.builder()
