@@ -27,7 +27,7 @@ import java.util.stream.Collectors;
 public class UserController {
 
     private final UserRepository userRepository;
-    private PasswordEncoder encoder;
+    private final PasswordEncoder encoder;
     private final JwtConfig jwtConfig;
 
     public UserController(UserRepository userDetailsService, PasswordEncoder encoder, JwtConfig jwtConfig) {
