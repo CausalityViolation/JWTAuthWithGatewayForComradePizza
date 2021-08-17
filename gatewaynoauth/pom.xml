@@ -14,7 +14,7 @@
     <name>gatewaynoauth</name>
     <description>Demo project for Spring Boot</description>
     <properties>
-        <java.version>15</java.version>
+        <java.version>16</java.version>
         <spring-cloud.version>2020.0.1</spring-cloud.version>
     </properties>
     <dependencyManagement>

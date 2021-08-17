@@ -20,16 +20,16 @@ spring:
         locator:
           enabled: true
       routes:
-        - id: persons-service
-          uri: lb://persons-service
+        - id: pizza-service
+          uri: lb://pizza-service
           predicates:
-            - Path=/persons/**
+            - Path=/pizzas/**
           filters:
-            - RewritePath=/persons/(?<path>.*), /persons/$\{path}
-        - id: auth
-          uri: http://localhost:9100
-          predicates:
-            - Path=/auth/**
-            - Method=POST
-          filters:
-            - RewritePath=/auth/(?<path>.*), /auth/$\{path}
+            - RewritePath=/pizzas/(?<path>.*), /pizzas/$\{path}
+#        - id: auth
+#          uri: http://localhost:9100
+#          predicates:
+#            - Path=/auth/**
+#            - Method=POST
+#          filters:
+#            - RewritePath=/auth/(?<path>.*), /auth/$\{path}
