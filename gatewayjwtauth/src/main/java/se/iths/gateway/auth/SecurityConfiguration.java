@@ -6,6 +6,7 @@ import org.springframework.boot.actuate.health.HealthEndpoint;
 import org.springframework.boot.actuate.info.InfoEndpoint;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
 import org.springframework.security.config.web.server.ServerHttpSecurity;
@@ -46,7 +47,8 @@ public class SecurityConfiguration {
                         swe.getResponse().setStatusCode(HttpStatus.FORBIDDEN))).and()
                 .authorizeExchange()
                 .pathMatchers("/auth/**").permitAll()
-                .pathMatchers("/persons/**").authenticated()
+                .pathMatchers(HttpMethod.GET,"/pizzas/**").permitAll()
+                .pathMatchers("/pizzas/**").authenticated()
                 .anyExchange().authenticated()
                 .and().build();
     }

@@ -22,7 +22,7 @@ public class SecurityConfiguration {
                 .httpBasic()
                 .and()
                 .authorizeExchange()
-                .pathMatchers(HttpMethod.GET,"/persons/**").permitAll()
+                .pathMatchers(HttpMethod.GET,"/pizzas/**").permitAll()
                 .anyExchange().hasRole("ADMIN")
                 .and()
                 .build();
