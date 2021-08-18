@@ -32,12 +32,12 @@ public class SecurityConfiguration {
     public MapReactiveUserDetailsService userDetailsService() {
         UserDetails user = User.builder()
                 .username("user")
-                .password("{noop}user")
+                .password("{noop}password")
                 .roles("USER")
                 .build();
         UserDetails admin = User.builder()
                 .username("admin")
-                .password("{noop}admin")
+                .password("{noop}password")
                 .roles("ADMIN")
                 .build();
         return new MapReactiveUserDetailsService(user, admin);
