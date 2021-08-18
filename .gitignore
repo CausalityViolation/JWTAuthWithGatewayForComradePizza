@@ -1,3 +1,5 @@
 /.idea/
 mvnw
 mvnw.cmd
+/jwtwithpublicprivatekeys/target/
+/jwtwithpublicprivatekeys/jwtwithpublicprivatekeys.iml
